@@ -21,8 +21,8 @@ import com.baz.meditationuicompose.ui.theme.TextWhite
 @Composable
 fun ChipSelection(
     chips: List<String>
-    = emptyList()
-//    = listOf("Sweet sleep", "Insomnia", "Depression")
+//    = emptyList()
+    = listOf("Sweet sleep", "Insomnia", "Depression")
 ) {
 
     var selectedChipIndex by remember {
