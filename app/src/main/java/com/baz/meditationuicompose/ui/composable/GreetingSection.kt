@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.baz.meditationuicompose.R
@@ -33,9 +34,13 @@ fun GreetingSection(
             Text(
                 text = "Good Morning, $name",
                 style = MaterialTheme.typography.h2
+                    .plus(other = TextStyle(color = Color.White))
             )
-            Text(text = "We wish you have a good day!",
-            style = MaterialTheme.typography.body1)
+            Text(
+                text = "We wish you have a good day!",
+                style = MaterialTheme.typography.body1
+                    .plus(other = TextStyle(color = Color.White))
+            )
         }
 
         Icon(

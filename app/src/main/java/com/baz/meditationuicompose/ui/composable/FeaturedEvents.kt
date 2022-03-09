@@ -21,12 +21,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.baz.meditationuicompose.ui.theme.ButtonBlue
 import com.baz.meditationuicompose.ui.theme.TextWhite
 import com.baz.meditationuicompose.ui.util.standardQuadFromTo
+import java.io.Serializable
 
 
 data class Feature(
@@ -34,14 +34,20 @@ data class Feature(
     @DrawableRes val iconId: Int,
     val lightColor: Color,
     val mediumColor: Color,
-    val darkColor: Color
-)
+    val darkColor: Color,
+    val description:String="",
+    val type:String="",
+    val totalTime:String="",
+    val totalSaved:Int=0,
+    val totalListening:Int=0
+):Serializable
 
 
 @OptIn(ExperimentalFoundationApi::class)
-@Preview
+//@Preview
 @Composable
 fun FeaturedEvents(
+    navigateToDetails: (Feature) -> Unit,
     features: List<Feature>
     = emptyList()
 ) {
@@ -59,7 +65,7 @@ fun FeaturedEvents(
             contentPadding = PaddingValues(start = 7.5.dp, end = 7.5.dp, bottom = 100.dp),
             modifier = Modifier.fillMaxHeight()){
             items(features.size){
-                FeatureItem(feature=features[it])
+                FeatureItem(feature=features[it], navigateToDetails)
             }
         }
     }
@@ -68,7 +74,7 @@ fun FeaturedEvents(
 
 // list item
 @Composable
-fun FeatureItem(feature: Feature) {
+fun FeatureItem(feature: Feature, navigateToDetails: (Feature) -> Unit) {
 
     BoxWithConstraints(
         modifier = Modifier
@@ -76,6 +82,7 @@ fun FeatureItem(feature: Feature) {
             .aspectRatio(1f)
             .clip(RoundedCornerShape(10.dp))
             .background(feature.darkColor)
+            .clickable { navigateToDetails(feature) }
     ) {
         val width = constraints.maxWidth
         val height = constraints.maxHeight
@@ -131,6 +138,7 @@ fun FeatureItem(feature: Feature) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .background(color = Color.Transparent)
                 .padding(15.dp)
         ) {
             Text(
@@ -144,6 +152,8 @@ fun FeatureItem(feature: Feature) {
                 contentDescription = feature.title,
                 tint = Color.White,
                 modifier = Modifier.align(Alignment.BottomStart)
+//                    .size(24.dp)
+                    .padding(vertical = 4.dp)
             )
             Text(
                 text = "Start",

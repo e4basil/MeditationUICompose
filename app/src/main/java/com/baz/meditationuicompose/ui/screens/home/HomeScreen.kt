@@ -13,10 +13,10 @@ import com.baz.meditationuicompose.R
 import com.baz.meditationuicompose.ui.composable.*
 import com.baz.meditationuicompose.ui.theme.*
 
-@Preview
+//@Preview
 @ExperimentalFoundationApi
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navigateToDetails: (Feature) -> Unit) {
 
     Box(
         modifier = Modifier
@@ -38,6 +38,7 @@ fun HomeScreen() {
 
 //            4
             FeaturedEvents(
+                navigateToDetails,
                 features = listOf(
                     Feature(
                         title = "Sleep meditation",
